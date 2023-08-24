@@ -1,8 +1,8 @@
-"""meaningful message
+"""message
 
-Revision ID: 88be68dfa959
+Revision ID: 5c1c09d916b8
 Revises: 
-Create Date: 2023-08-23 19:18:13.055853
+Create Date: 2023-08-24 13:21:58.918276
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '88be68dfa959'
+revision = '5c1c09d916b8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +27,7 @@ def upgrade():
     op.create_table('users_table',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(), nullable=False),
+    sa.Column('user_role', sa.String(), nullable=False),
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('_password_hash', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_users_table')),
@@ -45,7 +46,6 @@ def upgrade():
     op.create_table('images_table',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('image_url', sa.String(), nullable=True),
-    sa.Column('image_date', sa.Date(), nullable=True),
     sa.Column('set_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['set_id'], ['set_table.id'], name=op.f('fk_images_table_set_id_set_table')),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_images_table'))

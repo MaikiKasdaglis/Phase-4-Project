@@ -82,11 +82,13 @@ def create_photo_session():
 
 def create_users():
     users = []
+    role = ['photographer', 'pet_owner']
     for _ in range(15):
         u = User(
             username = fake.name(),
             email = fake.email(),
-            _password_hash = 123, 
+            password_hash = "123", 
+            user_role = random.choice(role),
         )
         users.append(u)
     return users

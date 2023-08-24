@@ -13,6 +13,7 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users_table'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable = False, unique = True)
+    user_role = db.Column(db.String, nullable = False)
     #validate this
     email = db.Column(db.String)
     _password_hash = db.Column(db.String, nullable=False)
@@ -74,6 +75,9 @@ class Image(db.Model, SerializerMixin):
     __tablename__ = 'images_table'
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String) 
+
+     #maybe make favorites 
+
     # image_date = db.Column(db.Date)
 
      # =================RELATIONSHIPS=======================================
@@ -87,6 +91,8 @@ class Image(db.Model, SerializerMixin):
 class PhotoSession(db.Model, SerializerMixin):
     __tablename__ = 'photo_sessions_table'
     id = db.Column(db.Integer, primary_key=True)
+
+    #SHOULD HAVE PRICE
 
      # =================RELATIONSHIPS=======================================
     dog_id = db.Column(db.Integer, db.ForeignKey('dogs_table.id'))
