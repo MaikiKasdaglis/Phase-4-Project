@@ -1,19 +1,30 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Login from "./components/login";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+
+//=======COMPONENTS====================
+// import Login from "../components/pages/Login";
+import Home from "../components/home";
+
+//========LAYOUTS======================
+import RootLayout from "../components/Layouts/RootLayout";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
+      {/* <Route index elemnt={<Login />} /> */}
+    </Route>
+  )
+);
 
 function App() {
-  useEffect(() => {
-    fetch("/api/check_session")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
-
-  return (
-    <>
-      <Login />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+// import Form from 'react-bootstrap/Form';
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -53,7 +55,9 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Login</button>
+          <Button variant="link" type="submit">
+            Login
+          </Button>
         </form>
       </div>
     </div>
