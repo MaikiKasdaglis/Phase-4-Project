@@ -1,8 +1,8 @@
-"""message
+"""add price and favorite
 
-Revision ID: 5c1c09d916b8
+Revision ID: 282991327db9
 Revises: 
-Create Date: 2023-08-24 13:21:58.918276
+Create Date: 2023-08-24 16:33:08.901081
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5c1c09d916b8'
+revision = '282991327db9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,7 +38,6 @@ def upgrade():
     sa.Column('dog_name', sa.String(), nullable=True),
     sa.Column('dog_breed', sa.String(), nullable=True),
     sa.Column('dog_age', sa.Integer(), nullable=True),
-    sa.Column('dog_description', sa.String(), nullable=True),
     sa.Column('dog_owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['dog_owner_id'], ['users_table.id'], name=op.f('fk_dogs_table_dog_owner_id_users_table')),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_dogs_table'))
@@ -46,12 +45,15 @@ def upgrade():
     op.create_table('images_table',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('image_url', sa.String(), nullable=True),
+    sa.Column('image_liked_by_users', sa.String(), nullable=True),
     sa.Column('set_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['set_id'], ['set_table.id'], name=op.f('fk_images_table_set_id_set_table')),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_images_table'))
     )
     op.create_table('photo_sessions_table',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('session_price', sa.Integer(), nullable=True),
+    sa.Column('session_description', sa.String(), nullable=True),
     sa.Column('dog_id', sa.Integer(), nullable=True),
     sa.Column('set_id', sa.Integer(), nullable=True),
     sa.Column('photographer_id', sa.Integer(), nullable=True),

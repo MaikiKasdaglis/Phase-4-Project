@@ -33,7 +33,6 @@ def create_dogs ():
             dog_name = fake.first_name(),
             dog_breed = random.choice(breeds),
             dog_age=fake.random_int(min=1, max=15),
-            dog_description=fake.sentence(),
             dog_owner_id = fake.random_int(min=1, max=15)
         )
         dogs.append(d)
@@ -63,7 +62,8 @@ def create_images():
         i = Image(
             image_url='https://placehold.co/400x400',
             # image_date=fake.date_between(start_date=start_date, end_date=end_date),
-            set_id=fake.random_int(min=1, max=10)
+            set_id=fake.random_int(min=1, max=10),
+            image_liked_by_users = 'no'
         )
         images.append(i)
     return images
@@ -75,7 +75,11 @@ def create_photo_session():
         ps = PhotoSession(
             dog_id = fake.random_int(min=1, max=20),
             set_id = fake.random_int(min=1, max=10),
-            photographer_id = fake.random_int(min=1, max=15)
+            photographer_id = fake.random_int(min=1, max=15),
+            session_price = 0,
+            session_description=fake.sentence(),
+            session_request =fake.sentence(),
+            session_date = 'aug 25, 2023'
         )
         photo_sessions.append(ps)
     return photo_sessions
@@ -84,11 +88,16 @@ def create_users():
     users = []
     role = ['photographer', 'pet_owner']
     for _ in range(15):
+        user_role = random.choice(role)
+        user_image = 'https://placehold.co/100x100' if user_role == 'photographer' else ''
+        user_bio = fake.sentence() if user_role == 'photographer' else ''
         u = User(
-            username = fake.name(),
-            email = fake.email(),
-            password_hash = "123", 
-            user_role = random.choice(role),
+            username=fake.name(),
+            email=fake.email(),
+            password_hash="123",
+            user_role=user_role,
+            user_image=user_image,
+            user_bio = user_bio
         )
         users.append(u)
     return users
