@@ -9,16 +9,17 @@ import {
 
 //=======COMPONENTS====================
 // import Login from "../components/pages/Login";
-import Home from "../components/home";
+import Home from "./components/home";
+import Login from "./components/pages/Login";
 
 //========LAYOUTS======================
-import RootLayout from "../components/Layouts/RootLayout";
+import RootLayout from "./components/Layouts/RootLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
-      {/* <Route index elemnt={<Login />} /> */}
+      <Route path="login" element={<Login />} />
+      <Route path="home" element={<Home />} />
     </Route>
   )
 );
