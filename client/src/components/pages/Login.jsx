@@ -48,7 +48,6 @@ function Login() {
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
-
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -58,15 +57,24 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
-
               <Button
                 variant="primary"
                 type="submit"
                 onClick={handleLogin}
-                className="mt-3"
+                className="mt-3 "
               >
                 Submit
               </Button>
+              <Button
+                variant="secondary"
+                onClick={() => history.push("/signup")} // Route to the signup page
+                className="mt-3 "
+                style={{ marginLeft: "10px" }}
+              >
+                Sign Up
+              </Button>
+              {/* ============= WOULD BE NICE TO ADD A 'SIGN UP BUTTON HERE'. */}
+              {/* ========== HAVE SIGNUP FORM RENDER ON CLICK. ALSO HAVE OPPORTUNITY TO REGISTER A DOG UPON SIGNUP  */}
             </Form>
           </div>
         </Col>
