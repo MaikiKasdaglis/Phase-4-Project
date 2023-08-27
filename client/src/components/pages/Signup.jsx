@@ -64,6 +64,7 @@ export default function Signup() {
                   }
                 />
               </Form.Group>
+              {/* THIS FORM IS MOSTLY WORKING BUT PASSWORD IS NOT BEING HASHED. MAYBE REMOVE _?? */}
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
