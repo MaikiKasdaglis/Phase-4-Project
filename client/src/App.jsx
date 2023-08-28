@@ -9,7 +9,7 @@ import {
 
 //=======COMPONENTS====================
 // import Login from "../components/pages/Login";
-import Home from "./components/home";
+import Home from "./components/pages/home";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 
