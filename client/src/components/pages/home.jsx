@@ -5,11 +5,11 @@ import PhotoSessionCard from "./PhotoSessionCard";
 
 export default function Home() {
   //========THIS IS THE CHECK SESSION. I DON'T KNOW WHY ITS HERE OR WHERE IT SHOULD GO
-  useEffect(() => {
-    fetch("/api/check_session")
-      .then((response) => response.json())
-      .then((data) => console.log("this is whos logged in", data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/check_session")
+  //     .then((response) => response.json())
+  //     .then((data) => console.log("this is whos logged in", data));
+  // }, []);
 
   const [photoSessionObj, setPhotoSessionObj] = useState([]);
   useEffect(() => {

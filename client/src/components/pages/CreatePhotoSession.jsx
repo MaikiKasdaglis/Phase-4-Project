@@ -119,7 +119,7 @@ export default function CreatePhotoSession() {
               <Form.Group controlId="session_date">
                 <Form.Label>session_date</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="date"
                   placeholder="Enter session_date"
                   value={photoSession.session_date}
                   onChange={(e) =>

@@ -3,3 +3,8 @@ nav a.active {
   border-radius: 10px;
   color: white !important;
 }
+.card-content-wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+}

@@ -6,6 +6,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 //=======COMPONENTS====================
 import Home from "./components/pages/home";
@@ -30,6 +31,13 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  useEffect(() => {
+    fetch("/api/check_session")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("this is whos logged in", data);
+      });
+  }, []);
   return <RouterProvider router={router} />;
 }
 
