@@ -15,6 +15,7 @@ import PhotoSet from "./components/pages/PhotoSet";
 
 //========LAYOUTS======================
 import RootLayout from "./components/Layouts/RootLayout";
+import CreatePhotoSession from "./components/pages/CreatePhotoSession";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="home" element={<Home />} />
       <Route path="home/photo_set/:setId" element={<PhotoSet />} />
       <Route path="login/signup" element={<Signup />} />
+      <Route path="create_session" element={<CreatePhotoSession />} />
     </Route>
   )
 );

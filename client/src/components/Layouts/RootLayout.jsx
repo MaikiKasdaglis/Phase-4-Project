@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import BreadCrumbs from "../helperComponents/BreadCrumbs";
+// import BreadCrumbs from "../helperComponents/BreadCrumbs";
 
 export default function RootLayout() {
   return (
@@ -23,7 +23,11 @@ export default function RootLayout() {
               <NavLink to="home" className="nav-link">
                 Home
               </NavLink>
+
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <Link to="create_session" className="dropdown-item">
+                  Create Session
+                </Link>
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action
@@ -43,7 +47,7 @@ export default function RootLayout() {
         </Container>
         {/* <h1>testin out container</h1> */}
       </Navbar>
-      <BreadCrumbs />
+      {/* <BreadCrumbs /> */}
       <main>
         <Outlet />
       </main>

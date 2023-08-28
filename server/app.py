@@ -235,7 +235,7 @@ class PhotoSessions(Resource):
                 set_id =request_obj["set_id"],
                 photographer_id =request_obj["photographer_id"],
                 session_description =request_obj["session_description"],
-                session_date= request_obj["session_description"],
+                session_date= request_obj["session_date"],
                 session_request= request_obj["session_request"]
             )
             db.session.add(new_session)
