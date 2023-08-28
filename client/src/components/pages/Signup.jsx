@@ -20,6 +20,7 @@ export default function Signup() {
 
   const handleSignup = (e) => {
     e.preventDefault();
+
     fetch("/api/users", {
       method: "POST",
       headers: {
@@ -75,7 +76,7 @@ export default function Signup() {
                 <Form.Control
                   type="password"
                   placeholder="Enter password"
-                  value={signupObj._password_hash}
+                  value={signupObj.password_hash}
                   onChange={(e) =>
                     setSignupObj({
                       ...signupObj,
@@ -84,40 +85,50 @@ export default function Signup() {
                   }
                 />
               </Form.Group>
-              <Form.Group controlId="formBasicUserRole">
+              <Form.Group
+                controlId="formBasicUserRole"
+                style={{ marginBottom: "10px" }}
+              >
                 <Form.Label>User Role</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Enter user role"
+                  as="select"
                   value={signupObj.user_role}
                   onChange={(e) =>
                     setSignupObj({ ...signupObj, user_role: e.target.value })
                   }
-                />
+                >
+                  <option value="">Select user role</option>
+                  <option value="photographer">Photographer</option>
+                  <option value="pet_owner">Client</option>
+                </Form.Control>
               </Form.Group>
-              <Form.Group controlId="formBasicUserImage">
-                <Form.Label>User Image</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter user image URL"
-                  value={signupObj.user_image}
-                  onChange={(e) =>
-                    setSignupObj({ ...signupObj, user_image: e.target.value })
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicUserBio">
-                <Form.Label>User Bio</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter user bio"
-                  value={signupObj.user_bio}
-                  onChange={(e) =>
-                    setSignupObj({ ...signupObj, user_bio: e.target.value })
-                  }
-                />
-              </Form.Group>
+              {signupObj.user_role === "photographer" && (
+                <Form.Group controlId="formBasicUserImage">
+                  <Form.Label>User Image</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter user image URL"
+                    value={signupObj.user_image}
+                    onChange={(e) =>
+                      setSignupObj({ ...signupObj, user_image: e.target.value })
+                    }
+                  />
+                </Form.Group>
+              )}
+              {signupObj.user_role === "photographer" && (
+                <Form.Group controlId="formBasicUserBio">
+                  <Form.Label>User Bio</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Enter user bio"
+                    value={signupObj.user_bio}
+                    onChange={(e) =>
+                      setSignupObj({ ...signupObj, user_bio: e.target.value })
+                    }
+                  />
+                </Form.Group>
+              )}
               <Button variant="primary" type="submit" className="m-1 ">
                 Sign Up
               </Button>
