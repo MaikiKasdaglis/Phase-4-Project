@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = React.useState("");
@@ -61,19 +62,19 @@ function Login() {
                 variant="primary"
                 type="submit"
                 onClick={handleLogin}
-                className="mt-3 "
+                className="m-1 "
               >
                 Submit
               </Button>
-              <Button
+              <Link
+                style={{ marginLeft: "5px" }}
+                className="btn btn-secondary"
                 variant="secondary"
-                onClick={() => history.push("/signup")} // Route to the signup page
-                className="mt-3 "
-                style={{ marginLeft: "10px" }}
+                to="signup"
+                activeClassName="active"
               >
-                Sign Up
-              </Button>
-              {/* ============= WOULD BE NICE TO ADD A 'SIGN UP BUTTON HERE'. */}
+                Signup
+              </Link>
               {/* ========== HAVE SIGNUP FORM RENDER ON CLICK. ALSO HAVE OPPORTUNITY TO REGISTER A DOG UPON SIGNUP  */}
             </Form>
           </div>
@@ -84,139 +85,3 @@ function Login() {
 }
 
 export default Login;
-
-//=====BOOTSTRAP STYLES==========
-
-// import { useState } from "react";
-// import { Form, Button } from "react-bootstrap";
-
-// function Login() {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     const userObj = {
-//       username,
-//       password,
-//     };
-//     console.log(userObj);
-//     fetch("/api/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(userObj),
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response error");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         console.log(data);
-//       })
-//       .catch((error) => {
-//         console.log("error", error.message);
-//       });
-//   };
-
-//   return (
-//     <Form>
-//       <Form.Group controlId="formBasicUsername">
-//         <Form.Label>Username</Form.Label>
-//         <Form.Control
-//           type="text"
-//           placeholder="Enter username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//       </Form.Group>
-
-//       <Form.Group controlId="formBasicPassword">
-//         <Form.Label>Password</Form.Label>
-//         <Form.Control
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//       </Form.Group>
-
-//       <Button variant="primary" type="submit" onClick={handleLogin}>
-//         Submit
-//       </Button>
-//     </Form>
-//   );
-// }
-
-// export default Login;
-
-// import { useState } from "react";
-// import Button from "react-bootstrap/Button";
-// // import Form from 'react-bootstrap/Form';
-
-// function Login() {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     const userObj = {
-//       username,
-//       password,
-//     };
-//     console.log(userObj);
-//     fetch("/api/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(userObj),
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response error");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         console.log(data);
-//       })
-//       .catch((error) => {
-//         console.log("error", error.message);
-//       });
-//   };
-
-//   return (
-//     <div className="App">
-//       <div className="login-container">
-//         <h2>Login</h2>
-//         <form onSubmit={handleLogin}>
-//           <div className="input-container">
-//             <label>Username:</label>
-//             <input
-//               type="text"
-//               value={username}
-//               onChange={(e) => setUsername(e.target.value)}
-//             />
-//           </div>
-//           <div className="input-container">
-//             <label>Password:</label>
-//             <input
-//               type="password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//             />
-//           </div>
-//           <Button variant="link" type="submit">
-//             Login
-//           </Button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;

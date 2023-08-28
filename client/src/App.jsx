@@ -19,9 +19,9 @@ import RootLayout from "./components/Layouts/RootLayout";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />}></Route>
       <Route path="home" element={<Home />} />
-      <Route path="signup" element={<Signup />} />
+      <Route path="login/signup" element={<Signup />} />
     </Route>
   )
 );

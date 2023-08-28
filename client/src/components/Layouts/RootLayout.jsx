@@ -45,19 +45,3 @@ export default function RootLayout() {
     </div>
   );
 }
-
-// return (
-//   <div className="root-layout">
-//     <header>
-//       <nav>
-//         <h1>company name</h1>
-//         <NavLink to="/">this is whats rendering </NavLink>
-//       </nav>
-//     </header>
-
-//     <main>
-//       <Outlet />
-//     </main>
-//   </div>
-// );
-// }

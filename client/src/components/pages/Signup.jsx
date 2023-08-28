@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
+  const handleBackToLogin = () => {
+    window.location.href = "http://localhost:3000/login";
+  };
+
   const [signupObj, setSignupObj] = useState({
     username: "",
     email: "",
@@ -113,8 +118,15 @@ export default function Signup() {
                   }
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className="m-1 ">
                 Sign Up
+              </Button>
+              <Button
+                style={{ marginLeft: "5px" }}
+                variant="secondary"
+                onClick={handleBackToLogin}
+              >
+                Back To Login
               </Button>
             </Form>
           </div>
