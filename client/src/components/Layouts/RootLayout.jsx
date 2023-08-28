@@ -15,11 +15,11 @@ export default function RootLayout() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {/* <Nav.Link href="#home">Home</Nav.Link> */}
-              <NavLink to="login" className="nav-link" activeClassName="active">
+              <NavLink to="login" className="nav-link">
                 Login
               </NavLink>
               {/* <Nav.Link href="#link">Link</Nav.Link> */}
-              <NavLink to="home" className="nav-link" activeClassName="active">
+              <NavLink to="home" className="nav-link">
                 Home
               </NavLink>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
