@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import BreadCrumbs from "../helperComponents/BreadCrumbs";
 
 export default function RootLayout() {
   return (
@@ -36,9 +37,13 @@ export default function RootLayout() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
+            {/* <h1>testing in</h1> */}
           </Navbar.Collapse>
+          {/* <h1>testing out </h1> */}
         </Container>
+        {/* <h1>testin out container</h1> */}
       </Navbar>
+      <BreadCrumbs />
       <main>
         <Outlet />
       </main>
