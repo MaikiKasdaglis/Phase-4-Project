@@ -8,10 +8,10 @@ import {
 } from "react-router-dom";
 
 //=======COMPONENTS====================
-// import Login from "../components/pages/Login";
 import Home from "./components/pages/home";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
+import PhotoSet from "./components/pages/PhotoSet";
 
 //========LAYOUTS======================
 import RootLayout from "./components/Layouts/RootLayout";
@@ -21,6 +21,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route path="login" element={<Login />}></Route>
       <Route path="home" element={<Home />} />
+      <Route path="home/photo_set/:setId" element={<PhotoSet />} />
       <Route path="login/signup" element={<Signup />} />
     </Route>
   )
