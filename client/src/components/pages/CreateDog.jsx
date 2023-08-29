@@ -13,25 +13,25 @@ export default function CreateDog() {
   const handleCreateDog = (e) => {
     e.preventDefault();
     console.log(dogObj);
-    // fetch("/api/dogs", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(dogObj),
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response error");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error.message);
-    //   });
+    fetch("/api/dogs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dogObj),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response error");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
   };
   return (
     <Container fluid>

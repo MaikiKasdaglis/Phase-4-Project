@@ -30,6 +30,7 @@ class Dogs(Resource):
                 dog_age =request_obj["dog_age"],
                 dog_name =request_obj["dog_name"],
                 dog_breed =request_obj["dog_breed"],
+                dog_owner_id = request_obj['dog_owner_id']
             )
             db.session.add(new_dog)
             db.session.commit()

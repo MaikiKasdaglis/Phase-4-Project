@@ -34,7 +34,18 @@ export default function RootLayout() {
                 <Link to="create_session" className="dropdown-item">
                   Create Session
                 </Link>
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                {user?.user_role === "pet_owner"
+                  ? ((
+                      <Link to="create_dog" className="dropdown-item">
+                        Create Dog
+                      </Link>
+                    ),
+                    (
+                      <Link to="photographers" className="dropdown-item">
+                        Meet Our Photographers
+                      </Link>
+                    ))
+                  : ""}
                 <NavDropdown.Item href="#action/3.2">
                   Another action
                 </NavDropdown.Item>

@@ -3,8 +3,12 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import UploadWidgets from "../helperComponents/UploadWidgets";
+import useUserStore from "../../hooks/userStore";
 
 export default function Signup() {
+  const { updateUser } = useUserStore();
+
   const handleBackToLogin = () => {
     window.location.href = "http://localhost:3000/login";
   };
@@ -14,19 +18,26 @@ export default function Signup() {
     email: "",
     _password_hash: "",
     user_role: "",
-    user_image: "",
     user_bio: "",
   });
 
+  const [image, setImage] = useState("");
+
   const handleSignup = (e) => {
     e.preventDefault();
+    const signObj = {
+      ...signupObj,
+      user_image: image,
+    };
+
+    console.log(signObj);
 
     fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(signupObj),
+      body: JSON.stringify(signObj),
     })
       .then((response) => {
         if (!response.ok) {
@@ -35,7 +46,7 @@ export default function Signup() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        updateUser(data);
       })
       .catch((error) => {
         console.log("error", error.message);
@@ -105,14 +116,15 @@ export default function Signup() {
               {signupObj.user_role === "photographer" && (
                 <Form.Group controlId="formBasicUserImage">
                   <Form.Label>User Image</Form.Label>
-                  <Form.Control
+                  <UploadWidgets setImage={setImage} />
+                  {/* <Form.Control
                     type="text"
                     placeholder="Enter user image URL"
                     value={signupObj.user_image}
                     onChange={(e) =>
                       setSignupObj({ ...signupObj, user_image: e.target.value })
                     }
-                  />
+                  /> */}
                 </Form.Group>
               )}
               {signupObj.user_role === "photographer" && (
