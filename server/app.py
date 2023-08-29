@@ -298,11 +298,12 @@ class Users(Resource):
             new_user = User(
                 username =request_obj["username"],
                 email =request_obj["email"],
-                _password_hash =request_obj["_password_hash"],
+                # _password_hash =request_obj["_password_hash"],
                 user_role = request_obj["user_role"],
                 user_image = request_obj["user_image"],
                 user_bio =request_obj["user_bio"],
             )
+            new_user.password_hash = request_obj["_password_hash"]
             db.session.add(new_user)
             db.session.commit()
             session['user_id'] = new_user.id

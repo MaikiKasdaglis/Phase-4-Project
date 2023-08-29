@@ -9,22 +9,23 @@ import useUserStore from "../../hooks/userStore";
 
 export default function RootLayout() {
   const { user } = useUserStore();
+  const navLinkText = user ? "Logout" : "Login";
+  const navLinkTo = user ? "/logout" : "/login";
 
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">Old Yellar's Pet Photography</Navbar.Brand>
-          <Navbar.Brand href="#home">Hello {user.username}</Navbar.Brand>
+          {/* <Navbar.Brand href="#home">Hello {user.username}</Navbar.Brand> */}
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {/* <Nav.Link href="#home">Home</Nav.Link> */}
-              <NavLink to="login" className="nav-link">
-                Login
+              <NavLink to={navLinkTo} className="nav-link">
+                {navLinkText}
               </NavLink>
-              {/* <Nav.Link href="#link">Link</Nav.Link> */}
+
               <NavLink to="home" className="nav-link">
                 Home
               </NavLink>

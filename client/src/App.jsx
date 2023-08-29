@@ -13,6 +13,7 @@ import Home from "./components/pages/home";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import PhotoSet from "./components/pages/PhotoSet";
+import Logout from "./components/pages/Logout";
 
 //========LAYOUTS======================
 import RootLayout from "./components/Layouts/RootLayout";
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="home/photo_set/:setId" element={<PhotoSet />} />
       <Route path="login/signup" element={<Signup />} />
       <Route path="create_session" element={<CreatePhotoSession />} />
+      <Route path="logout" element={<Logout />} />
     </Route>
   )
 );
@@ -38,9 +40,10 @@ function App() {
     fetch("/api/check_session")
       .then((response) => response.json())
       .then((data) => {
-        updateUser(data);
+        // console.log(data.username);
+        data.username != undefined ? updateUser(data) : null;
         console.log("this is whos logged in", data);
-        // console.log(user);
+        console.log(user);
       });
   }, []);
   return <RouterProvider router={router} />;

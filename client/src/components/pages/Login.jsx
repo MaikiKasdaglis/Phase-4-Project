@@ -1,10 +1,13 @@
 import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useUserStore from "../../hooks/userStore";
 
 function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
+  const { updateUser } = useUserStore();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -27,7 +30,9 @@ function Login() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log("this is what we talkin bout", data);
+        updateUser(data);
+        navigate("/home");
       })
       .catch((error) => {
         console.log("error", error.message);
