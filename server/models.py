@@ -14,8 +14,16 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable = False, unique = True)
     user_role = db.Column(db.String, nullable = False)
+    user_image = db.Column(db.String)
+    user_bio = db.Column(db.String)
     #validate this
+    
     email = db.Column(db.String)
+    @validates('email')
+    def validate_email(self, key, value):
+        if '@' in value:
+            return value
+        raise ValueError('Must be a valid email.')
     _password_hash = db.Column(db.String, nullable=False)
 
     # =================RELATIONSHIPS=======================================
@@ -47,7 +55,6 @@ class Dog(db.Model, SerializerMixin):
     dog_name = db.Column(db.String)
     dog_breed = db.Column(db.String)
     dog_age = db.Column(db.Integer)
-    dog_description = db.Column(db.String)
 
      # =================RELATIONSHIPS=======================================
     dog_owner_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
@@ -75,8 +82,8 @@ class Image(db.Model, SerializerMixin):
     __tablename__ = 'images_table'
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String) 
-
-     #maybe make favorites 
+    image_liked_by_users = db.Column(db.String)
+    
 
     # image_date = db.Column(db.Date)
 
@@ -93,6 +100,10 @@ class PhotoSession(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
 
     #SHOULD HAVE PRICE
+    session_price = db.Column(db.Integer) 
+    session_description= db.Column(db.String) 
+    session_request= db.Column(db.String)
+    session_date  = db.Column(db.String) 
 
      # =================RELATIONSHIPS=======================================
     dog_id = db.Column(db.Integer, db.ForeignKey('dogs_table.id'))
@@ -108,5 +119,10 @@ class PhotoSession(db.Model, SerializerMixin):
 
      # =================SERIALIZER RULES=======================================
     serialize_rules = ('-dog_field', '-set_field', '-dog_owner_field', '-owned_dog_field', '-image_field', '-photographer_field')
+
+
+
+
+
 
 

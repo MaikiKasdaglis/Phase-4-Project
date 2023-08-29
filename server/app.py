@@ -30,7 +30,7 @@ class Dogs(Resource):
                 dog_age =request_obj["dog_age"],
                 dog_name =request_obj["dog_name"],
                 dog_breed =request_obj["dog_breed"],
-                dog_description =request_obj["dog_description"]
+                dog_owner_id = request_obj['dog_owner_id']
             )
             db.session.add(new_dog)
             db.session.commit()
@@ -41,16 +41,22 @@ class Dogs(Resource):
             
 api.add_resource(Dogs, '/dogs')
 
+#========RIGHT NOW DOGSBYID GET HAS USER CONDITIONS ===========
 class DogsById(Resource):
     def get(self, id):
         response_obj = Dog.query.filter_by(id=id).first()
+        print (response_obj.dog_owner_id)
+        print(session.get('user_id'))
+        
         if response_obj == None:
             response_dict = {
                 "error": "Dog not found"
             }
             return make_response(response_dict, 404)
         else:
-            return make_response(response_obj.to_dict(), 200)
+            if session.get('user_id') == response_obj.dog_owner_id:
+                return make_response(response_obj.to_dict(), 200)
+            return make_response({'message': 'not valid user'}, 404)
     def patch(self, id):
         response_obj = Dog.query.filter_by(id=id).first()
         if response_obj == None:
@@ -59,16 +65,19 @@ class DogsById(Resource):
             }
             return make_response(response_dict, 404)
         else:
-            request_object = request.get_json()
-            try:
-                for attr in request_object:
-                    setattr(response_obj, attr, request_object[attr])
-                    db.session.add(response_obj)
-                    db.session.commit()
-            except Exception as e:
-                message = {'errors': [e.__str__()]}
-                return make_response(message, 422)
-            return make_response(response_obj.to_dict(), 200)
+            if session.get('user_id') == response_obj.dog_owner_id:
+                request_object = request.get_json()
+                try:
+                    for attr in request_object:
+                        setattr(response_obj, attr, request_object[attr])
+                        db.session.add(response_obj)
+                        db.session.commit()
+                except Exception as e:
+                    message = {'errors': [e.__str__()]}
+                    return make_response(message, 422)
+                return make_response(response_obj.to_dict(), 200)
+            return make_response({'message': 'not valid user'}, 404)
+             
     def delete(self, id):
         response_obj = Dog.query.filter_by(id=id).first()
         if response_obj == None:
@@ -77,10 +86,12 @@ class DogsById(Resource):
             }
             return make_response(response_dict, 404)
         else:
-            db.session.delete(response_obj)
-            db.session.commit()
-            response_dict = {'message': 'deleted fo sho!'}
-            return response_dict, 200
+            if session.get('user_id') == response_obj.dog_owner_id:
+                db.session.delete(response_obj)
+                db.session.commit()
+                response_dict = {'message': 'deleted fo sho!'}
+                return response_dict, 200
+            return make_response({'message': 'not valid user'}, 404)
 api.add_resource(DogsById, '/dogs/<int:id>')
 
 class Sets(Resource):
@@ -158,6 +169,7 @@ class Images(Resource):
                  image_url =request_obj["image_url"],
                 #  image_date =request_obj["image_date"],
                  set_id =request_obj["set_id"],
+                 image_liked_by_users =request_obj["image_liked_by_users"]
                  
                 
             )
@@ -222,7 +234,10 @@ class PhotoSessions(Resource):
             new_session = PhotoSession(
                 dog_id =request_obj["dog_id"],
                 set_id =request_obj["set_id"],
-                photographer_id =request_obj["photographer_id"]
+                photographer_id =request_obj["photographer_id"],
+                session_description =request_obj["session_description"],
+                session_date= request_obj["session_date"],
+                session_request= request_obj["session_request"]
             )
             db.session.add(new_session)
             db.session.commit()
@@ -284,9 +299,12 @@ class Users(Resource):
             new_user = User(
                 username =request_obj["username"],
                 email =request_obj["email"],
-                _password_hash =request_obj["_password_hash"],
+                # _password_hash =request_obj["_password_hash"],
                 user_role = request_obj["user_role"],
+                user_image = request_obj["user_image"],
+                user_bio =request_obj["user_bio"],
             )
+            new_user.password_hash = request_obj["_password_hash"]
             db.session.add(new_user)
             db.session.commit()
             session['user_id'] = new_user.id
