@@ -231,14 +231,22 @@ class PhotoSessions(Resource):
     def post(self):
         request_obj = request.get_json()
         try:
+            new_set = Set(
+                set_title = '',
+                set_description =''
+            )
+            db.session.add(new_set)
+            db.session.commit()
             new_session = PhotoSession(
                 dog_id =request_obj["dog_id"],
-                set_id =request_obj["set_id"],
+                set_id =new_set.id,
                 photographer_id =request_obj["photographer_id"],
                 session_description =request_obj["session_description"],
                 session_date= request_obj["session_date"],
                 session_request= request_obj["session_request"]
             )
+
+             
             db.session.add(new_session)
             db.session.commit()
         except Exception as e:

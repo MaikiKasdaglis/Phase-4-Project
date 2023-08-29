@@ -11,6 +11,7 @@ export default function RootLayout() {
   const { user } = useUserStore();
   const navLinkText = user ? "Logout" : "Login";
   const navLinkTo = user ? "/logout" : "/login";
+  console.log("this is the user object", user);
 
   return (
     <div>
@@ -25,38 +26,44 @@ export default function RootLayout() {
               <NavLink to={navLinkTo} className="nav-link">
                 {navLinkText}
               </NavLink>
-
-              <NavLink to="home" className="nav-link">
-                Home
-              </NavLink>
-
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <Link to="create_session" className="dropdown-item">
-                  Create Session
-                </Link>
-                {user?.user_role === "pet_owner"
-                  ? ((
-                      <Link to="create_dog" className="dropdown-item">
-                        Create Dog
-                      </Link>
-                    ),
-                    (
-                      <Link to="photographers" className="dropdown-item">
-                        Meet Our Photographers
-                      </Link>
-                    ))
-                  : ""}
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+              {user?.id ? (
+                <NavLink to="home" className="nav-link">
+                  Home
+                </NavLink>
+              ) : (
+                ""
+              )}
+              {user?.id ? (
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <Link to="create_session" className="dropdown-item">
+                    Create Session
+                  </Link>
+                  {user?.user_role === "pet_owner"
+                    ? ((
+                        <Link to="create_dog" className="dropdown-item">
+                          Create Dog
+                        </Link>
+                      ),
+                      (
+                        <Link to="photographers" className="dropdown-item">
+                          Meet Our Photographers
+                        </Link>
+                      ))
+                    : ""}
+                  <NavDropdown.Item href="#action/3.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    Something
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    Separated link
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                ""
+              )}
             </Nav>
             {/* <h1>testing in</h1> */}
           </Navbar.Collapse>

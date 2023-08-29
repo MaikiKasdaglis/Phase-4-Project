@@ -7,7 +7,6 @@ export default function CreatePhotoSession() {
     session_price: 0,
     session_description: "",
     dog_id: "",
-    set_id: "",
     photographer_id: "",
     session_date: "",
     session_request: "",
@@ -88,7 +87,7 @@ export default function CreatePhotoSession() {
                   }
                 />
               </Form.Group>
-              <Form.Group controlId="set_id">
+              {/* <Form.Group controlId="set_id">
                 <Form.Label>set_id</Form.Label>
                 <Form.Control
                   type="text"
@@ -101,7 +100,7 @@ export default function CreatePhotoSession() {
                     })
                   }
                 />
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group controlId="photographer_id">
                 <Form.Label>photographer_id</Form.Label>
                 <Form.Control

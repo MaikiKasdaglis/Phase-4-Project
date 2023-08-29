@@ -7,7 +7,7 @@ export default function PhotoSessionCard({ obj }) {
   return (
     <Col g-2 style={{ margin: "10px 0" }}>
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={obj.set_field.image_field[0].image_url} />
+        <Card.Img variant="top" src={obj.set_field.image_field[0]?.image_url} />
         <Card.Body style={{ height: "200px" }}>
           <Card.Title>{obj.dog_field.dog_name}</Card.Title>
 
