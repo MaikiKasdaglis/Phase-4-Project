@@ -5,13 +5,11 @@ import PhotoSessionCard from "./PhotoSessionCard";
 import useUserStore from "../../hooks/userStore";
 
 export default function Home() {
-  //========THIS IS THE CHECK SESSION. I DON'T KNOW WHY ITS HERE OR WHERE IT SHOULD GO
-  // useEffect(() => {
-  //   fetch("/api/check_session")
-  //     .then((response) => response.json())
-  //     .then((data) => console.log("this is whos logged in", data));
-  // }, []);
   const { user } = useUserStore();
+  const [allDogs, setAllDogs] = useState([]);
+  console.log("this is the user we fuckin with", user);
+  console.log("this is the ROLE we fuckin with", user.user_role);
+  console.log("this is the ID we fuckin with", user.id);
 
   const [photoSessionObj, setPhotoSessionObj] = useState([]);
   useEffect(() => {
@@ -20,9 +18,27 @@ export default function Home() {
       .then((data) => {
         setPhotoSessionObj(data);
       });
+    fetch("/api/dogs")
+      .then((response) => response.json())
+      .then((D) => setAllDogs(D));
   }, []);
-  console.log(photoSessionObj);
-  // console.log(user);
+
+  const usersDogs = allDogs.filter((dog) => dog.dog_owner_id === user.id);
+  console.log(`these are the dogs ${user.username} owns:`, usersDogs);
+  console.log(
+    `this is all the photosessions we need to filter?`,
+    photoSessionObj
+  );
+  //this shit works for a sec, then breaks on refresh. some sync shit prob?
+  console.log(`testing drilling`, photoSessionObj[0]?.id);
+
+  const displayOwnerSessions = photoSessionObj.filter((session) =>
+    usersDogs.some((dog) => dog.id === session.dog_id)
+  );
+  console.log(
+    `this should be ${user.username}'s sessions relevant to dogs`,
+    displayOwnerSessions
+  );
   return (
     <>
       <Container>

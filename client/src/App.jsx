@@ -43,7 +43,7 @@ function App() {
         // console.log(data.username);
         data.username != undefined ? updateUser(data) : null;
         console.log("this is whos logged in", data);
-        console.log(user);
+        // console.log(user);
       });
   }, []);
   return <RouterProvider router={router} />;
