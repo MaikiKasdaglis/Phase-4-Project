@@ -7,6 +7,8 @@ import useUserStore from "../../hooks/userStore";
 export default function Home() {
   const { user } = useUserStore();
   const [allDogs, setAllDogs] = useState([]);
+  let displayOwnerSessions;
+  // const [displaySet, setDisplaySet] = useState([]);
   console.log("this is the user we fuckin with", user);
   console.log("this is the ROLE we fuckin with", user.user_role);
   console.log("this is the ID we fuckin with", user.id);
@@ -23,27 +25,29 @@ export default function Home() {
       .then((D) => setAllDogs(D));
   }, []);
 
-  const usersDogs = allDogs.filter((dog) => dog.dog_owner_id === user.id);
-  console.log(`these are the dogs ${user.username} owns:`, usersDogs);
-  console.log(
-    `this is all the photosessions we need to filter?`,
-    photoSessionObj
-  );
-  //this shit works for a sec, then breaks on refresh. some sync shit prob?
-  console.log(`testing drilling`, photoSessionObj[0]?.id);
+  if (user.user_role === "pet_owner") {
+    const usersDogs = allDogs.filter((dog) => dog.dog_owner_id === user.id);
+    displayOwnerSessions = photoSessionObj.filter((session) =>
+      usersDogs.some((dog) => dog.id === session.dog_id)
+    );
+    console.log(
+      `this should be ${user.username}'s sessions relevant to dogs`,
+      displayOwnerSessions
+    );
+    // setDisplaySet(displayOwnerSessions);
+  } else {
+    displayOwnerSessions = photoSessionObj.filter(
+      (session) => session.photographer_id === user.id
+    );
+    console.log("yay", displayOwnerSessions);
+    // setDisplaySet(displayOwnerSessions);
+  }
 
-  const displayOwnerSessions = photoSessionObj.filter((session) =>
-    usersDogs.some((dog) => dog.id === session.dog_id)
-  );
-  console.log(
-    `this should be ${user.username}'s sessions relevant to dogs`,
-    displayOwnerSessions
-  );
   return (
     <>
       <Container>
         <Row className="m-3" g-2>
-          {photoSessionObj.map((obj) => (
+          {displayOwnerSessions.map((obj) => (
             <PhotoSessionCard key={obj.id} obj={obj} />
           ))}
         </Row>

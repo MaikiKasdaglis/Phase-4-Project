@@ -20,6 +20,7 @@ import RootLayout from "./components/Layouts/RootLayout";
 import CreatePhotoSession from "./components/pages/CreatePhotoSession";
 
 import useUserStore from "./hooks/userStore";
+import CreateDog from "./components/pages/CreateDog";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,12 +31,13 @@ const router = createBrowserRouter(
       <Route path="login/signup" element={<Signup />} />
       <Route path="create_session" element={<CreatePhotoSession />} />
       <Route path="logout" element={<Logout />} />
+      <Route path="create_dog" element={<CreateDog />} />
     </Route>
   )
 );
 
 function App() {
-  const { user, updateUser } = useUserStore();
+  const { updateUser } = useUserStore();
   useEffect(() => {
     fetch("/api/check_session")
       .then((response) => response.json())

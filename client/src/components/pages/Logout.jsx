@@ -3,7 +3,7 @@ import useUserStore from "../../hooks/userStore";
 import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
-  const { user, updateUser, deleteUser } = useUserStore();
+  const { deleteUser } = useUserStore();
   const navigate = useNavigate();
 
   const handleBackToHome = () => {
@@ -28,6 +28,7 @@ export default function Logout() {
       .then((data) => {
         console.log(data);
         deleteUser();
+        navigate("/login");
       })
       .catch((error) => {
         console.log("error", error.message);
