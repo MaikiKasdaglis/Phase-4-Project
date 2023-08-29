@@ -5,13 +5,18 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 // import BreadCrumbs from "../helperComponents/BreadCrumbs";
+import useUserStore from "../../hooks/userStore";
 
 export default function RootLayout() {
+  const { user } = useUserStore();
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">Old Yellar's Pet Photography</Navbar.Brand>
+          <Navbar.Brand href="#home">Hello {user.username}</Navbar.Brand>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

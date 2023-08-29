@@ -6,7 +6,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 //=======COMPONENTS====================
 import Home from "./components/pages/home";
@@ -17,6 +17,8 @@ import PhotoSet from "./components/pages/PhotoSet";
 //========LAYOUTS======================
 import RootLayout from "./components/Layouts/RootLayout";
 import CreatePhotoSession from "./components/pages/CreatePhotoSession";
+
+import useUserStore from "./hooks/userStore";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,11 +33,14 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  const { user, updateUser } = useUserStore();
   useEffect(() => {
     fetch("/api/check_session")
       .then((response) => response.json())
       .then((data) => {
+        updateUser(data);
         console.log("this is whos logged in", data);
+        // console.log(user);
       });
   }, []);
   return <RouterProvider router={router} />;

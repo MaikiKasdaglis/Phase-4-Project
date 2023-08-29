@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import PhotoSessionCard from "./PhotoSessionCard";
+import useUserStore from "../../hooks/userStore";
 
 export default function Home() {
   //========THIS IS THE CHECK SESSION. I DON'T KNOW WHY ITS HERE OR WHERE IT SHOULD GO
@@ -10,6 +11,7 @@ export default function Home() {
   //     .then((response) => response.json())
   //     .then((data) => console.log("this is whos logged in", data));
   // }, []);
+  const { user } = useUserStore();
 
   const [photoSessionObj, setPhotoSessionObj] = useState([]);
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function Home() {
       });
   }, []);
   console.log(photoSessionObj);
+  // console.log(user);
   return (
     <>
       <Container>
