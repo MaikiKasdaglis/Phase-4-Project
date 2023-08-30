@@ -8,6 +8,8 @@ function Login() {
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
   const { updateUser } = useUserStore();
+  const backgroundImageURL =
+    "https://i.pinimg.com/564x/30/ec/f3/30ecf302ac72d8bda2631fd4104aeaa9.jpg";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -40,52 +42,80 @@ function Login() {
   };
 
   return (
-    <Container fluid>
-      <Row className="justify-content-center mt-4">
-        <Col xs={12} md={8} lg={6}>
-          <div className="border p-4 rounded">
-            <Form>
-              <Form.Group controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-              <Button
-                variant="primary"
-                type="submit"
-                onClick={handleLogin}
-                className="m-1 "
-              >
-                Submit
-              </Button>
-              <Link
-                style={{ marginLeft: "5px" }}
-                className="btn btn-secondary"
-                variant="secondary"
-                to="signup"
-                activeClassName="active"
-              >
-                Signup
-              </Link>
-              {/* ========== HAVE SIGNUP FORM RENDER ON CLICK. ALSO HAVE OPPORTUNITY TO REGISTER A DOG UPON SIGNUP  */}
-            </Form>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <div
+      style={{
+        position: "relative",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center", // This will center vertically
+      }}
+    >
+      {/* Background Image */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url(${backgroundImageURL})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: 1,
+        }}
+      ></div>
+
+      <Container style={{ zIndex: 5, position: "relative" }}>
+        <Row className="justify-content-center">
+          <Col xs={12} md={8} lg={6}>
+            <div
+              className="border p-4 rounded"
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}
+            >
+              <Form>
+                <Form.Group controlId="formBasicUsername">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={handleLogin}
+                  className="m-1 "
+                >
+                  Submit
+                </Button>
+                <Link
+                  style={{ marginLeft: "5px" }}
+                  className="btn btn-secondary"
+                  variant="secondary"
+                  to="signup"
+                  activeClassName="active"
+                >
+                  Signup
+                </Link>
+                {/* ========== HAVE SIGNUP FORM RENDER ON CLICK. ALSO HAVE OPPORTUNITY TO REGISTER A DOG UPON SIGNUP  */}
+              </Form>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 

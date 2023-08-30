@@ -5,6 +5,7 @@ import ImageCard from "./ImageCard";
 import useUserStore from "../../hooks/userStore";
 import UploadWidgets from "../helperComponents/UploadWidgets";
 import { useNavigate } from "react-router-dom";
+import CreateImage from "./CreateImage";
 
 export default function PhotoSet() {
   const navigate = useNavigate();
@@ -94,7 +95,7 @@ export default function PhotoSet() {
 
               <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
-                  <Modal.Title>Modal heading</Modal.Title>
+                  <Modal.Title>Edit Current Set</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <Form onSubmit={handleEdit}>
@@ -124,7 +125,7 @@ export default function PhotoSet() {
                       />
                     </Form.Group>
                   </Form>
-                  <UploadWidgets setImage={setImage} />
+                  <CreateImage setId={setId} />
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleClose}>

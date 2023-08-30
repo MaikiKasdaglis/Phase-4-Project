@@ -34,7 +34,7 @@ export default function RootLayout() {
                 ""
               )}
               {user?.id ? (
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown title="Menu" id="basic-nav-dropdown">
                   {/* <Link to="create_session" className="dropdown-item">
                     Create Session
                   </Link> */}
@@ -65,7 +65,13 @@ export default function RootLayout() {
             </Nav>
             {/* <h1>testing in</h1> */}
           </Navbar.Collapse>
-          {user?.id ? <h6 className="nav-link">Hello! {user.username}</h6> : ""}
+          {/* {user?.id ? <h6 className="nav-link">Hello! {user.username}</h6> : ""} */}
+          <NavDropdown title={user?.username} id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.4">Edit Profile</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.4">
+              Delete Profile
+            </NavDropdown.Item>
+          </NavDropdown>
           {/* <h1>testing out </h1> */}
         </Container>
         {/* <h1>testin out container</h1> */}
