@@ -17,15 +17,20 @@ export default function RootLayout() {
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
+          <img
+            src="./Old_Yeller_Logo_Black-01.png"
+            alt=""
+            style={{ width: "80px", height: "80px" }}
+          />
           <Navbar.Brand href="#home">Old Yellar's Pet Photography</Navbar.Brand>
           {/* <Navbar.Brand href="#home">Hello {user.username}</Navbar.Brand> */}
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavLink to={navLinkTo} className="nav-link">
+              {/* <NavLink to={navLinkTo} className="nav-link">
                 {navLinkText}
-              </NavLink>
+              </NavLink> */}
               {user?.id ? (
                 <NavLink to="home" className="nav-link">
                   Home
@@ -66,7 +71,13 @@ export default function RootLayout() {
             {/* <h1>testing in</h1> */}
           </Navbar.Collapse>
           {/* {user?.id ? <h6 className="nav-link">Hello! {user.username}</h6> : ""} */}
-          <NavDropdown title={user?.username} id="basic-nav-dropdown">
+          <NavDropdown
+            title={user?.id ? user?.username : "Login/Signup"}
+            id="basic-nav-dropdown"
+          >
+            <NavLink to={navLinkTo} className="dropdown-item">
+              {navLinkText}
+            </NavLink>
             <NavDropdown.Item href="#action/3.4">Edit Profile</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.4">
               Delete Profile
