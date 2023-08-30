@@ -9,9 +9,9 @@ export default function Home() {
   const [allDogs, setAllDogs] = useState([]);
   let displayOwnerSessions;
   // const [displaySet, setDisplaySet] = useState([]);
-  console.log("this is the user we fuckin with", user);
-  console.log("this is the ROLE we fuckin with", user.user_role);
-  console.log("this is the ID we fuckin with", user.id);
+  // console.log("this is the user we fuckin with", user);
+  // console.log("this is the ROLE we fuckin with", user.user_role);
+  // console.log("this is the ID we fuckin with", user.id);
 
   const [photoSessionObj, setPhotoSessionObj] = useState([]);
   useEffect(() => {
@@ -30,16 +30,16 @@ export default function Home() {
     displayOwnerSessions = photoSessionObj.filter((session) =>
       usersDogs.some((dog) => dog.id === session.dog_id)
     );
-    console.log(
-      `this should be ${user.username}'s sessions relevant to dogs`,
-      displayOwnerSessions
-    );
+    // console.log(
+    //   `this should be ${user.username}'s sessions relevant to dogs`,
+    //   displayOwnerSessions
+    // );
     // setDisplaySet(displayOwnerSessions);
   } else {
     displayOwnerSessions = photoSessionObj.filter(
       (session) => session.photographer_id === user.id
     );
-    console.log("yay", displayOwnerSessions);
+    // console.log("yay", displayOwnerSessions);
     // setDisplaySet(displayOwnerSessions);
   }
 

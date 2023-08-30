@@ -13,6 +13,13 @@ export default function PhotoSessionCard({ obj }) {
       },
       body: JSON.stringify(),
     });
+    fetch(`/api/photo_set/${obj.set_field.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(),
+    });
   };
   return (
     <Col g-2 style={{ margin: "10px 0" }}>
@@ -44,6 +51,7 @@ export default function PhotoSessionCard({ obj }) {
             >
               Delete
             </Button>
+            {/* ===============NEED CASCADING DELETE TO GET TO SET AND ALL IMAGES WITH THAT SET ID */}
           </div>
         </Card.Body>
       </Card>

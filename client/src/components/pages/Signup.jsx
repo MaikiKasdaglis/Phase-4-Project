@@ -117,14 +117,6 @@ export default function Signup() {
                 <Form.Group controlId="formBasicUserImage">
                   <Form.Label>User Image</Form.Label>
                   <UploadWidgets setImage={setImage} />
-                  {/* <Form.Control
-                    type="text"
-                    placeholder="Enter user image URL"
-                    value={signupObj.user_image}
-                    onChange={(e) =>
-                      setSignupObj({ ...signupObj, user_image: e.target.value })
-                    }
-                  /> */}
                 </Form.Group>
               )}
               {signupObj.user_role === "photographer" && (
