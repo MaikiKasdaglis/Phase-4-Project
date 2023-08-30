@@ -61,7 +61,7 @@ export default function RootLayout() {
 
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">
-                    Separated link
+                    Contact Us!
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
