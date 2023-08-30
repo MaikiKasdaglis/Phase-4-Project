@@ -11,7 +11,7 @@ export default function RootLayout() {
   const { user } = useUserStore();
   const navLinkText = user ? "Logout" : "Login";
   const navLinkTo = user ? "/logout" : "/login";
-  console.log("this is the user object", user);
+  // console.log("this is the user object", user);
 
   return (
     <div>
@@ -38,18 +38,22 @@ export default function RootLayout() {
                   <Link to="create_session" className="dropdown-item">
                     Create Session
                   </Link>
-                  {user?.user_role === "pet_owner"
-                    ? ((
-                        <Link to="create_dog" className="dropdown-item">
-                          Create Dog
-                        </Link>
-                      ),
-                      (
-                        <Link to="photographers" className="dropdown-item">
-                          Meet Our Photographers
-                        </Link>
-                      ))
-                    : ""}
+                  {user?.user_role === "pet_owner" ? (
+                    <Link to="photographers" className="dropdown-item">
+                      Meet Our Photographers
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+
+                  {user?.user_role === "pet_owner" ? (
+                    <Link to="create_dog" className="dropdown-item">
+                      Create Dog
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+
                   <NavDropdown.Item href="#action/3.2">
                     Another action
                   </NavDropdown.Item>
@@ -67,6 +71,7 @@ export default function RootLayout() {
             </Nav>
             {/* <h1>testing in</h1> */}
           </Navbar.Collapse>
+          {user?.id ? <h6 className="nav-link">Hello! {user.username}</h6> : ""}
           {/* <h1>testing out </h1> */}
         </Container>
         {/* <h1>testin out container</h1> */}

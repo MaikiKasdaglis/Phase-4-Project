@@ -9,9 +9,10 @@ export default function PhotoSessionCard({ obj }) {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={obj.set_field.image_field[0]?.image_url} />
         <Card.Body style={{ height: "200px" }}>
-          <Card.Title>{obj.dog_field.dog_name}</Card.Title>
+          <Card.Title>Dog Name: {obj.dog_field.dog_name}</Card.Title>
 
           <Card.Text style={{ height: "80px", overflow: "auto" }}>
+            Session Details:
             {obj["session_description"]}
           </Card.Text>
 

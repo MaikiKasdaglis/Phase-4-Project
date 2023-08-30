@@ -1,12 +1,16 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
+import useUserStore from "../../hooks/userStore";
+import UploadWidgets from "../helperComponents/UploadWidgets";
 
 export default function PhotoSet() {
+  const { user } = useUserStore();
   const { setId } = useParams();
   const [filterStatus, setFilterStatus] = useState(false);
   const [photoSet, setPhotoSet] = useState([]);
+  const [image, setImage] = useState("");
   useEffect(() => {
     fetch(`/api//sets/${setId}`)
       .then((response) => response.json())
@@ -25,17 +29,27 @@ export default function PhotoSet() {
           style={{ zIndex: "999" }}
         >
           <div className="d-flex flex-column">
-            <h2>{photoSet.set_title}</h2>
-            <p>{photoSet.set_description}</p>
+            <h2>Title: {photoSet.set_title}</h2>
+            <p>Description: {photoSet.set_description}</p>
           </div>
           <Button
             variant="primary"
-            onClick={(e) => {
-              setFilterStatus(!filterStatus), console.log(filterStatus);
+            onClick={() => {
+              setFilterStatus(!filterStatus);
             }}
           >
             {filterStatus ? "Show Loved Images" : "Show all Images"}
           </Button>
+          {user?.user_role === "photographer" ? (
+            <Button onClick={() => console.log("clickin")}>Edit Session</Button>
+          ) : (
+            ""
+          )}
+          {user?.user_role === "photographer" ? (
+            <UploadWidgets setImage={setImage} />
+          ) : (
+            ""
+          )}
         </div>
         <Row className="m-3" g-2>
           {photoSet.image_field

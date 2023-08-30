@@ -1,9 +1,11 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useUserStore from "../../hooks/userStore";
+import DogCard from "./DogCard";
 
 export default function CreateDog() {
   const { user } = useUserStore();
+  const [userDogs, setUserDogs] = useState([]);
   const [dogObj, setDogObj] = useState({
     dog_name: "",
     dog_breed: "",
@@ -12,7 +14,7 @@ export default function CreateDog() {
   });
   const handleCreateDog = (e) => {
     e.preventDefault();
-    console.log(dogObj);
+    console.log(`this is the object from createDogForm`, dogObj);
     fetch("/api/dogs", {
       method: "POST",
       headers: {
@@ -33,64 +35,63 @@ export default function CreateDog() {
         console.log("error", error.message);
       });
   };
+  useEffect(() => {
+    fetch(`/api/dogs`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserDogs(data);
+      });
+  }, []);
+  const dogList = userDogs.filter((dog) => dog.dog_owner_id === user.id);
+  console.log(`${user.username} owns`, dogList);
+
   return (
-    <Container fluid>
-      <Row className="justify-content-center mt-4">
-        <Col xs={12} md={8} lg={6}>
-          <div className="border p-4 rounded">
+    <Container>
+      <Row className="mt-4">
+        <Col g-2 style={{ margin: "10px 0" }}>
+          <h5 style={{ marginLeft: "20px " }}>Your Current Dogs</h5>
+          {dogList.map((dog) => (
+            <DogCard key={dog.id} dog={dog} />
+          ))}
+        </Col>
+
+        <Col>
+          <div className="border p-4 rounded" style={{ marginRight: "20px" }}>
             <Form onSubmit={handleCreateDog}>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Label>Dog Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="What do you call your dog?"
                   value={dogObj.dog_name}
                   onChange={(e) =>
-                    setDogObj({
-                      ...dogObj,
-                      dog_name: e.target.value,
-                    })
+                    setDogObj({ ...dogObj, dog_name: e.target.value })
                   }
                 />
               </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
+              <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Dog Breed</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="What breed is your dog?"
                   value={dogObj.dog_breed}
                   onChange={(e) =>
-                    setDogObj({
-                      ...dogObj,
-                      dog_breed: e.target.value,
-                    })
+                    setDogObj({ ...dogObj, dog_breed: e.target.value })
                   }
                 />
               </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
+              <Form.Group controlId="exampleForm.ControlTextarea2">
                 <Form.Label>Dog Age</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="How old is your dog?"
                   value={dogObj.dog_age}
                   onChange={(e) =>
-                    setDogObj({
-                      ...dogObj,
-                      dog_age: e.target.value,
-                    })
+                    setDogObj({ ...dogObj, dog_age: e.target.value })
                   }
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" className="m-1 ">
+              <Button variant="primary" type="submit" className="m-1">
                 Register Dog!
               </Button>
             </Form>
