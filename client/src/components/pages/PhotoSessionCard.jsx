@@ -2,8 +2,18 @@
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
+import { Button } from "react-bootstrap";
 
 export default function PhotoSessionCard({ obj }) {
+  const handleDelete = () => {
+    fetch(`/api/photo_sessions/${obj.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(),
+    });
+  };
   return (
     <Col g-2 style={{ margin: "10px 0" }}>
       <Card style={{ width: "18rem" }}>
@@ -16,14 +26,25 @@ export default function PhotoSessionCard({ obj }) {
             {obj["session_description"]}
           </Card.Text>
 
-          <Link
-            className="btn btn-primary"
-            variant="primary"
-            to={`photo_set/${obj.set_field.id}`}
-            activeClassName="active"
-          >
-            View All Images
-          </Link>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Link
+              className="btn btn-primary"
+              variant="primary"
+              to={`photo_set/${obj.set_field.id}`}
+              activeClassName="active"
+              style={{ width: "100%", marginRight: "10px" }}
+            >
+              View All
+            </Link>
+
+            <Button
+              variant="danger"
+              onClick={() => handleDelete()}
+              style={{ width: "100%" }}
+            >
+              Delete
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     </Col>

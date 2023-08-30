@@ -1,8 +1,24 @@
+/* eslint-disable react/jsx-key */
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-// import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useUserStore from "../../hooks/userStore";
+import { useEffect, useState } from "react";
 
 export default function CreatePhotoSession() {
+  const navigate = useNavigate();
+  const { user } = useUserStore();
+  const [userDogs, setUserDogs] = useState([]);
+  console.log("this is the user from createPhotoSession", user);
+
+  useEffect(() => {
+    fetch(`/api/dogs`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserDogs(data);
+      });
+  }, []);
+  const dogList = userDogs.filter((dog) => dog.dog_owner_id === user.id);
+  console.log(`${user.username} owns`, dogList);
   const [photoSession, setPhotoSession] = useState({
     session_price: 0,
     session_description: "",
@@ -74,8 +90,8 @@ export default function CreatePhotoSession() {
               </Form.Group>
 
               <Form.Group controlId="dog_id">
-                <Form.Label>dog_id</Form.Label>
-                <Form.Control
+                <Form.Label>Dog Name</Form.Label>
+                {/* <Form.Control
                   type="text"
                   placeholder="Enter dog_id"
                   value={photoSession.dog_id}
@@ -85,8 +101,23 @@ export default function CreatePhotoSession() {
                       dog_id: e.target.value,
                     })
                   }
-                />
+                /> */}
+                <Form.Control
+                  as="select"
+                  // value={signupObj.user_role}
+                  onChange={(e) =>
+                    setPhotoSession({ ...photoSession, dog_id: e.target.value })
+                  }
+                >
+                  <option value="">Select Dog</option>
+                  {dogList.map((dog) => (
+                    <option value={dog.id}>{dog.dog_name}</option>
+                  ))}
+                  {/* <option value="photographer">Photographer</option>
+                <option value="pet_owner">Client</option> */}
+                </Form.Control>
               </Form.Group>
+
               {/* <Form.Group controlId="set_id">
                 <Form.Label>set_id</Form.Label>
                 <Form.Control
@@ -145,6 +176,13 @@ export default function CreatePhotoSession() {
               </Form.Group>
               <Button variant="primary" type="submit" className="m-1 ">
                 Book Session!
+              </Button>
+              <Button
+                style={{ marginLeft: "5px" }}
+                variant="secondary"
+                onClick={(e) => navigate("/photographers")}
+              >
+                Back To Photographers
               </Button>
             </Form>
           </div>

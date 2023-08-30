@@ -19,7 +19,7 @@ export default function PhotoSet() {
       });
   }, [filterStatus]);
 
-  console.log(photoSet);
+  console.log("this is a set", photoSet);
 
   return (
     <>

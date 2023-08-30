@@ -35,9 +35,9 @@ export default function RootLayout() {
               )}
               {user?.id ? (
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <Link to="create_session" className="dropdown-item">
+                  {/* <Link to="create_session" className="dropdown-item">
                     Create Session
-                  </Link>
+                  </Link> */}
                   {user?.user_role === "pet_owner" ? (
                     <Link to="photographers" className="dropdown-item">
                       Meet Our Photographers
@@ -54,12 +54,6 @@ export default function RootLayout() {
                     ""
                   )}
 
-                  <NavDropdown.Item href="#action/3.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    Something
-                  </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">
                     Separated link

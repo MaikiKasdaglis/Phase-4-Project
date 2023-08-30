@@ -31,7 +31,10 @@ const router = createBrowserRouter(
       <Route path="home" element={<Home />} />
       <Route path="home/photo_set/:setId" element={<PhotoSet />} />
       <Route path="login/signup" element={<Signup />} />
-      <Route path="create_session" element={<CreatePhotoSession />} />
+      <Route
+        path="photographers/create_session"
+        element={<CreatePhotoSession />}
+      />
       <Route path="logout" element={<Logout />} />
       <Route path="create_dog" element={<CreateDog />} />
       <Route path="photographer_card" element={<PhotographerCard />} />

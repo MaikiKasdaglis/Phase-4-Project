@@ -1,8 +1,8 @@
-"""add price and favorite
+"""message
 
-Revision ID: 282991327db9
+Revision ID: beb2738542b6
 Revises: 
-Create Date: 2023-08-24 16:33:08.901081
+Create Date: 2023-08-30 12:11:34.469241
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '282991327db9'
+revision = 'beb2738542b6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,6 +28,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(), nullable=False),
     sa.Column('user_role', sa.String(), nullable=False),
+    sa.Column('user_image', sa.String(), nullable=True),
+    sa.Column('user_bio', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('_password_hash', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_users_table')),
@@ -54,6 +56,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('session_price', sa.Integer(), nullable=True),
     sa.Column('session_description', sa.String(), nullable=True),
+    sa.Column('session_request', sa.String(), nullable=True),
+    sa.Column('session_date', sa.String(), nullable=True),
     sa.Column('dog_id', sa.Integer(), nullable=True),
     sa.Column('set_id', sa.Integer(), nullable=True),
     sa.Column('photographer_id', sa.Integer(), nullable=True),
