@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { useEffect } from "react";
+import useUserStore from "./hooks/userStore";
 
 //=======COMPONENTS====================
 import Home from "./components/pages/home";
@@ -14,15 +15,14 @@ import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import PhotoSet from "./components/pages/PhotoSet";
 import Logout from "./components/pages/Logout";
+import CreateDog from "./components/pages/CreateDog";
+import PhotographerCard from "./components/pages/PhotographerCard";
+import Photographers from "./components/pages/Photographers";
+import EditProfile from "./components/pages/EditProfile";
 
 //========LAYOUTS======================
 import RootLayout from "./components/Layouts/RootLayout";
 import CreatePhotoSession from "./components/pages/CreatePhotoSession";
-
-import useUserStore from "./hooks/userStore";
-import CreateDog from "./components/pages/CreateDog";
-import PhotographerCard from "./components/pages/PhotographerCard";
-import Photographers from "./components/pages/Photographers";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +39,7 @@ const router = createBrowserRouter(
       <Route path="create_dog" element={<CreateDog />} />
       <Route path="photographer_card" element={<PhotographerCard />} />
       <Route path="photographers" element={<Photographers />} />
+      <Route path="edit_profile" element={<EditProfile />} />
     </Route>
   )
 );
