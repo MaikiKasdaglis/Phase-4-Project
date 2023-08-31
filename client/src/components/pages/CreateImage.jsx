@@ -50,13 +50,17 @@ export default function CreateImage({ setId }) {
   return (
     <>
       <Form onSubmit={handleCreate}>
-        <Form.Group controlId="formBasicUserImage">
-          <Form.Label>Upload Image</Form.Label>
-          <UploadWidgets setImage={setImage} />
-        </Form.Group>{" "}
-        <Button variant="primary" type="submit" className="m-1 ">
-          Submit Image
-        </Button>
+        <div
+          className="mt-2 "
+          style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}
+        >
+          <Form.Group controlId="formBasicUserImage">
+            <UploadWidgets setImage={setImage} />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit Image
+          </Button>
+        </div>
       </Form>
     </>
   );
