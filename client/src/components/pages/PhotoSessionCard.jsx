@@ -30,7 +30,7 @@ export default function PhotoSessionCard({ obj }) {
       <Card style={{ width: "18rem" }}>
         {/* <Card.Img variant="top" src={firsImage} /> */}
 
-        {firsImage.includes(".") ? (
+        {firsImage && firsImage.includes(".") ? (
           <Card.Img variant="top" src={firsImage} />
         ) : (
           <AdvancedImage

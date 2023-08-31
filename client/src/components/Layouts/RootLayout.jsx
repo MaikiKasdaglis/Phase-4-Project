@@ -103,11 +103,47 @@ export default function RootLayout() {
                   ) : (
                     ""
                   )}
+                  {user?.user_role === "pet_owner" ? (
+                    <>
+                      {" "}
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">
+                        Contact Us!
+                      </NavDropdown.Item>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user_role === "photographer" ? (
+                    <Link to="" className="dropdown-item">
+                      Ask me about useLocation
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user_role === "photographer" ? (
+                    <Link to="home" className="dropdown-item">
+                      Photographer Stuff
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user_role === "photographer" ? (
+                    <>
+                      {" "}
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">
+                        Check Messages
+                      </NavDropdown.Item>
+                    </>
+                  ) : (
+                    ""
+                  )}
 
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">
                     Contact Us!
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> */}
                 </NavDropdown>
               ) : (
                 ""
