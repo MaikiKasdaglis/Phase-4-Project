@@ -11,6 +11,7 @@ export default function ImageCard({ image }) {
   const { user } = useUserStore();
   console.log(`this is from image card`, image);
   const { id, image_liked_by_users, image_url, set_id } = image;
+  console.log(image_url);
 
   function handleUpdate() {
     const updatedImage = {
@@ -53,7 +54,6 @@ export default function ImageCard({ image }) {
       <Card
         style={{
           width: "18rem",
-          background: "linear-gradient(blue, darkblue, grey)",
         }}
       >
         {/* <Card.Img variant="top" src={image.image_url} /> */}

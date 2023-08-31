@@ -19,15 +19,20 @@ export default function CreateImage({ setId }) {
       ...imageObj,
       image_url: image,
     };
+    // const finalObj = {
+    //   set_id: setId,
+    //   image_liked_by_users: "no",
+    //   image_url: image,
+    // };
 
-    console.log(finalObj);
+    // console.log(finalObj);
 
     fetch("/api/images", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(imageObj),
+      body: JSON.stringify(finalObj),
     })
       .then((response) => {
         if (!response.ok) {
@@ -36,7 +41,7 @@ export default function CreateImage({ setId }) {
         return response.json();
       })
       .then((data) => {
-        updateUser(data);
+        console.log(data);
       })
       .catch((error) => {
         console.log("error", error.message);
