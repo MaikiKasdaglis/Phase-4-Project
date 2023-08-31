@@ -5,12 +5,24 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import UploadWidgets from "../helperComponents/UploadWidgets";
 import useUserStore from "../../hooks/userStore";
-import Carousel from "react-bootstrap/Carousel";
-export default function Signup() {
-  const { updateUser } = useUserStore();
+
+export default function EditProfile() {
+  //======================BACKGROUND STUFF=====================
+  const backgroundStyle = {
+    backgroundImage:
+      "linear-gradient(rgba(50, 50, 50, 0.8), rgba(255, 255, 255, 0.2)), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4_yBNVbYuRP0dC5WYt68fVFsG-67s3P4qpw&usqp=CAU)",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+    minHeight: "100vh",
+    padding: "20px",
+    backgroundSize: "cover",
+  };
+
+  //==========================================================
+  const { user, updateUser } = useUserStore();
 
   const handleBackToLogin = () => {
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = "http://localhost:3000/home";
   };
 
   const [signupObj, setSignupObj] = useState({
@@ -32,8 +44,8 @@ export default function Signup() {
 
     console.log(signObj);
 
-    fetch("/api/users", {
-      method: "POST",
+    fetch(`/api/users/${user.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -54,46 +66,13 @@ export default function Signup() {
   };
 
   return (
-    <div style={{ position: "relative", height: "100vh" }}>
-      <Carousel fade controls={false} indicators={false} interval={3000}>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://i.pinimg.com/564x/5e/bb/62/5ebb62c6addf790cc999d64d287ad937.jpg"
-            alt="First slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://i.pinimg.com/564x/17/11/82/171182e69b88a2b4e69c498bd8616446.jpg"
-            alt="Second slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://i.pinimg.com/564x/82/de/3e/82de3e69a4e6a8be1eadbc3d1301c2ed.jpg"
-            alt="Third slide"
-          />
-        </Carousel.Item>
-        {/* ... add more items if you have more images */}
-      </Carousel>
-
-      <Container
-        style={{
-          zIndex: 5,
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <Row className="justify-content-center">
+    <div style={backgroundStyle}>
+      <Container fluid>
+        <Row className="justify-content-center mt-4">
           <Col xs={12} md={8} lg={6}>
             <div
               className="border p-4 rounded"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
             >
               <Form onSubmit={handleSignup}>
                 <Form.Group controlId="formBasicUsername">
@@ -171,14 +150,14 @@ export default function Signup() {
                   </Form.Group>
                 )}
                 <Button variant="primary" type="submit" className="m-1 ">
-                  Sign Up
+                  Save Changes
                 </Button>
                 <Button
                   style={{ marginLeft: "5px" }}
                   variant="secondary"
                   onClick={handleBackToLogin}
                 >
-                  Back To Login
+                  Back To Home
                 </Button>
               </Form>
             </div>

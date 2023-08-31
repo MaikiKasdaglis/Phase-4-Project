@@ -1,10 +1,55 @@
 nav a.active {
-  background: #0d6efd;
-  border-radius: 10px;
+  background: #a9d262;
+  /* border-radius: 10px; */
   color: white !important;
 }
 .card-content-wrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100%;
+}
+body {
+  font-family: "Oswald", sans-serif;
+
+  font-weight: 600; /* Adjust as needed */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 400; /* Adjust as needed */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-body-tertiary {
+  background: linear-gradient(45deg, #373831, #24392b, #427c55);
+  background-size: 200% 200%;
+  animation: gradientAnimation 10s infinite;
+}
+
+.btn-primary {
+  background-color: #024211 !important; /* Bootstrap's green color */
+  border-color: #abd025 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: #218838 !important; /* Darken green color for hover, focus, and active states */
+  border-color: #010702 !important;
 }

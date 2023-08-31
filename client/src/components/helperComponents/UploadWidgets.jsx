@@ -9,7 +9,7 @@ function UploadWidget({ setImage }) {
   const widgetRef = useRef();
 
   useEffect(() => {
-    console.log(window.cloudinary);
+    // console.log(window.cloudinary);
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
       {
@@ -18,11 +18,11 @@ function UploadWidget({ setImage }) {
       },
       function (error, result) {
         if (result.event == "success") {
-          console.log(result);
-          console.log(result.info.url);
+          // console.log(result);
+          // console.log(result.info.url);
           setImage(result.info.public_id);
         } else {
-          console.log(result);
+          // console.log(result);
         }
       }
     );
