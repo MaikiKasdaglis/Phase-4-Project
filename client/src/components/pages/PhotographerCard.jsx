@@ -75,8 +75,15 @@ export default function PhotographerCard({ photographer }) {
   };
 
   return (
-    <Col g-2 style={{ margin: "10px 0" }}>
-      <Card style={{ width: "18rem" }}>
+    <Col g-2 style={{ margin: "20px 0" }}>
+      {" "}
+      {/* Adjusted margin */}
+      <Card
+        style={{
+          width: "18rem",
+          backgroundImage: "linear-gradient(gray, lightgray)",
+        }}
+      >
         {user_image.includes(".") ? (
           <Card.Img variant="top" src={user_image} />
         ) : (

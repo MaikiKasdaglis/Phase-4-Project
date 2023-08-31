@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 
-export default function PhotoSessionCard({ obj }) {
+export default function PhotoSessionCard({ obj, deleteSession }) {
   const cld = new Cloudinary({ cloud: { cloudName: "dug4rmcqv" } });
   const handleDelete = () => {
     fetch(`/api/photo_sessions/${obj.id}`, {
@@ -16,6 +16,7 @@ export default function PhotoSessionCard({ obj }) {
       },
       body: JSON.stringify(),
     });
+    deleteSession(obj.id);
     fetch(`/api/photo_set/${obj.set_field.id}`, {
       method: "DELETE",
       headers: {

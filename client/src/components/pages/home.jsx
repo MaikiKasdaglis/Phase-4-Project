@@ -36,6 +36,11 @@ export default function Home() {
       .then((D) => setAllDogs(D));
   }, []);
 
+  const removePhotoSessionById = (idToDelete) => {
+    const newData = photoSessionObj.filter((item) => item.id !== idToDelete);
+    setPhotoSessionObj(newData);
+  };
+
   if (user.user_role === "pet_owner") {
     const usersDogs = allDogs.filter((dog) => dog.dog_owner_id === user.id);
     displayOwnerSessions = photoSessionObj.filter((session) =>
@@ -59,7 +64,11 @@ export default function Home() {
       <Container>
         <Row className="m-3" g-2>
           {displayOwnerSessions.map((obj) => (
-            <PhotoSessionCard key={obj.id} obj={obj} />
+            <PhotoSessionCard
+              key={obj.id}
+              obj={obj}
+              deleteSession={removePhotoSessionById}
+            />
           ))}
         </Row>
       </Container>
