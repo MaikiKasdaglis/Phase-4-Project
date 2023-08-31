@@ -6,7 +6,12 @@ import { Link } from "react-router-dom";
 import UploadWidgets from "../helperComponents/UploadWidgets";
 import useUserStore from "../../hooks/userStore";
 import Carousel from "react-bootstrap/Carousel";
+import { useNavigate } from "react-router-dom";
 export default function Signup() {
+  const navigate = useNavigate();
+  const handleBackToHome = () => {
+    navigate("/home");
+  };
   const { updateUser } = useUserStore();
 
   const handleBackToLogin = () => {
@@ -47,6 +52,7 @@ export default function Signup() {
       })
       .then((data) => {
         updateUser(data);
+        handleBackToHome();
       })
       .catch((error) => {
         console.log("error", error.message);

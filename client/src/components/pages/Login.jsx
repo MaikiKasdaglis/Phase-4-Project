@@ -1,11 +1,13 @@
 import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "../../hooks/userStore";
 import Carousel from "react-bootstrap/Carousel";
+import { useState } from "react";
 function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [errorStatus, setErrrorStatus] = useState(false);
   const navigate = useNavigate();
   const { updateUser } = useUserStore();
   // const backgroundImageURL =
@@ -38,12 +40,29 @@ function Login() {
       })
       .catch((error) => {
         console.log("error", error.message);
+        setErrrorStatus(!errorStatus);
+        console.log(errorStatus);
       });
   };
 
   return (
     <div style={{ position: "relative", height: "100vh" }}>
-      <Carousel fade controls={false} indicators={false} interval={1000}>
+      {errorStatus ? (
+        <>
+          {["danger"].map((variant) => (
+            <Alert key={variant} variant={variant}>
+              Invalid Username or Password. Click the link to Signup
+              <Link style={{ color: "red" }} to="signup">
+                . JOIN NOW!
+              </Link>
+              .
+            </Alert>
+          ))}
+        </>
+      ) : (
+        ""
+      )}
+      <Carousel fade controls={false} indicators={false} interval={3000}>
         <Carousel.Item>
           <img
             className="d-block w-100"

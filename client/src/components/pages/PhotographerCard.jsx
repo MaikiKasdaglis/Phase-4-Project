@@ -83,6 +83,7 @@ export default function PhotographerCard({ photographer }) {
           <AdvancedImage
             cldImg={cld.image(user_image)}
             height="285"
+            // className="img-fluid"
             key={user.user_image}
           />
         )}

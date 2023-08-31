@@ -27,8 +27,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String, nullable=False)
 
     # =================RELATIONSHIPS=======================================
-    owned_dog_field = relationship('Dog', back_populates='dog_owner_field')
-    photo_session_field = relationship('PhotoSession', back_populates='photographer_field')
+    owned_dog_field = relationship('Dog', back_populates='dog_owner_field', cascade = 'all, delete')
+    photo_session_field = relationship('PhotoSession', back_populates='photographer_field', cascade = 'all, delete')
 
      # =================SERIALIZER RULES=======================================
     serialize_rules = ('-set_field', '-owned_dog_field','-photo_session_field', '-dog_field', '-image_field',)
@@ -60,7 +60,7 @@ class Dog(db.Model, SerializerMixin):
     dog_owner_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
     dog_owner_field = relationship('User', back_populates='owned_dog_field')
 
-    photo_session_field = relationship('PhotoSession', back_populates='dog_field', cascade = 'all, delete')
+    photo_session_field = relationship('PhotoSession', back_populates='dog_field')
 
      # =================SERIALIZER RULES=======================================
     serialize_rules = ('-set_field','-dog_owner_field','-photo_session_field', '-image_field', '-photographer_field' )
@@ -72,8 +72,8 @@ class Set(db.Model, SerializerMixin):
     set_description = db.Column(db.String)
     
      # =================RELATIONSHIPS=======================================
-    photo_session_field = relationship('PhotoSession', back_populates='set_field', cascade = 'all, delete')
-    image_field = relationship('Image', back_populates='set_field')
+    photo_session_field = relationship('PhotoSession', back_populates='set_field')
+    image_field = relationship('Image', back_populates='set_field', cascade = 'all, delete')
 
      # =================SERIALIZER RULES=======================================
     serialize_rules = ('-dog_owner_field', '-owned_dog_field','-photo_session_field', '-dog_field', '-photographer_field' )
@@ -89,7 +89,7 @@ class Image(db.Model, SerializerMixin):
 
      # =================RELATIONSHIPS=======================================
     set_id = db.Column(db.Integer, db.ForeignKey('set_table.id'))
-    set_field = relationship('Set', back_populates='image_field')
+    set_field = relationship('Set', back_populates='image_field', cascade = 'all, delete')
 
      # =================SERIALIZER RULES=======================================
     serialize_rules = ('-set_field','-dog_owner_field', '-owned_dog_field','-photo_session_field', '-dog_field', '-photographer_field')
@@ -110,7 +110,7 @@ class PhotoSession(db.Model, SerializerMixin):
     dog_field = relationship('Dog', back_populates='photo_session_field')
 
     set_id = db.Column(db.Integer, db.ForeignKey('set_table.id'))
-    set_field = relationship('Set', back_populates='photo_session_field')
+    set_field = relationship('Set', back_populates='photo_session_field', cascade = 'all, delete')
 
     photographer_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
     photographer_field = relationship('User', back_populates="photo_session_field")

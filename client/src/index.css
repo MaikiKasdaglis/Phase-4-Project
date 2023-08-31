@@ -53,3 +53,6 @@ h5 {
   background-color: #218838 !important; /* Darken green color for hover, focus, and active states */
   border-color: #010702 !important;
 }
+.dropdown-toggle {
+  color: white !important;
+}

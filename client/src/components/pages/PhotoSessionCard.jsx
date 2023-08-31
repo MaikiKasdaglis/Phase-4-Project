@@ -3,8 +3,11 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from "@cloudinary/react";
 
 export default function PhotoSessionCard({ obj }) {
+  const cld = new Cloudinary({ cloud: { cloudName: "dug4rmcqv" } });
   const handleDelete = () => {
     fetch(`/api/photo_sessions/${obj.id}`, {
       method: "DELETE",
@@ -21,10 +24,23 @@ export default function PhotoSessionCard({ obj }) {
       body: JSON.stringify(),
     });
   };
+  const firsImage = obj.set_field.image_field[0]?.image_url;
   return (
     <Col g-2 style={{ margin: "10px 0" }}>
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={obj.set_field.image_field[0]?.image_url} />
+        {/* <Card.Img variant="top" src={firsImage} /> */}
+
+        {firsImage.includes(".") ? (
+          <Card.Img variant="top" src={firsImage} />
+        ) : (
+          <AdvancedImage
+            cldImg={cld.image(firsImage)}
+            height="285"
+            // className="img-fluid"
+            key={firsImage}
+          />
+        )}
+
         <Card.Body style={{ height: "200px" }}>
           <Card.Title>Dog Name: {obj.dog_field.dog_name}</Card.Title>
 
@@ -43,7 +59,6 @@ export default function PhotoSessionCard({ obj }) {
             >
               View All
             </Link>
-
             <Button
               variant="danger"
               onClick={() => handleDelete()}
@@ -51,7 +66,8 @@ export default function PhotoSessionCard({ obj }) {
             >
               Delete
             </Button>
-            {/* ===============NEED CASCADING DELETE TO GET TO SET AND ALL IMAGES WITH THAT SET ID */}
+            {/* ===============NEED CASCADING DELETE TO GET TO SET AND ALL IMAGES */}
+            {/* WITH THAT SET I */}
           </div>
         </Card.Body>
       </Card>

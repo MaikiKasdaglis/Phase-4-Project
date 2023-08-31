@@ -42,6 +42,17 @@ export default function CreateDog() {
       })
       .then((data) => {
         console.log(data);
+
+        // Add the new dog to the userDogs array
+        setUserDogs([...userDogs, data]);
+
+        // Reset the dogObj state to clear the input fields
+        setDogObj({
+          dog_name: "",
+          dog_breed: "",
+          dog_age: 0,
+          dog_owner_id: user.id,
+        });
       })
       .catch((error) => {
         console.log("error", error.message);
@@ -53,7 +64,7 @@ export default function CreateDog() {
       .then((data) => {
         setUserDogs(data);
       });
-  }, []);
+  }, [dogObj, userDogs]);
   const dogList = userDogs.filter((dog) => dog.dog_owner_id === user.id);
   console.log(`${user.username} owns`, dogList);
 
@@ -62,7 +73,7 @@ export default function CreateDog() {
       <Container>
         <Row className="mb-4">
           <Col xs={12}>
-            <h5>Your Current Dogs</h5>
+            <h5 style={{ color: "white" }}>Your Current Dogs</h5>
           </Col>
           {dogList.map((dog) => (
             <Col xs={12} md={4} className="mb-3" key={dog.id}>

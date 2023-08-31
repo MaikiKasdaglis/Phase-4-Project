@@ -27,7 +27,7 @@ import CreatePhotoSession from "./components/pages/CreatePhotoSession";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="login" element={<Login />}></Route>
+      <Route path="login" element={<Login />} />
       <Route path="home" element={<Home />} />
       <Route path="home/photo_set/:setId" element={<PhotoSet />} />
       <Route path="login/signup" element={<Signup />} />

@@ -47,7 +47,7 @@ export default function PhotoSet() {
       .then((data) => {
         setPhotoSet(data);
       });
-  }, [filterStatus]);
+  }, [filterStatus, photoSet]);
 
   //=============PATCH REQUEST================
 
