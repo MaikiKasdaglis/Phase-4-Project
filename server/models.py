@@ -89,7 +89,7 @@ class Image(db.Model, SerializerMixin):
 
      # =================RELATIONSHIPS=======================================
     set_id = db.Column(db.Integer, db.ForeignKey('set_table.id'))
-    set_field = relationship('Set', back_populates='image_field', cascade = 'all, delete')
+    set_field = relationship('Set', back_populates='image_field')
 
      # =================SERIALIZER RULES=======================================
     serialize_rules = ('-set_field','-dog_owner_field', '-owned_dog_field','-photo_session_field', '-dog_field', '-photographer_field')
