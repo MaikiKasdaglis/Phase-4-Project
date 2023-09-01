@@ -190,7 +190,7 @@ export default function PhotoSet() {
               }}
               className="me-2"
             >
-              {filterStatus ? "Show Loved Images" : "Show all Images"}
+              {filterStatus ? "Show All Images" : "Show Loved Images"}
             </Button>
             <Button onClick={() => navigate("/home")} className="me-2">
               Back To Home

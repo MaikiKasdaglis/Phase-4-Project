@@ -346,6 +346,8 @@ class UsersById(Resource):
             try:
                 for attr in request_object:
                     setattr(response_obj, attr, request_object[attr])
+                    response_obj.password_hash = request_object["_password_hash"]
+
                     db.session.add(response_obj)
                     db.session.commit()
             except Exception as e:
