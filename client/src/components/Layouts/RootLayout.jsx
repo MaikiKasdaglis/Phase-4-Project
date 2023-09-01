@@ -6,12 +6,17 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { Row, Col } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+
 // import BreadCrumbs from "../helperComponents/BreadCrumbs";
 import useUserStore from "../../hooks/userStore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RootLayout() {
+  let location = useLocation();
+  console.log(`this is params`, location.pathname);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -52,11 +57,13 @@ export default function RootLayout() {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <img
-            src="./Old_Yeller_Logo_Black-01.png"
+            src="./Old_Yeller_Logo_White-02.png"
             alt=""
-            style={{ width: "80px", height: "80px" }}
+            style={{ width: "100px", height: "100px" }}
           />
-          <Navbar.Brand href="#home">Old Yellar's Pet Photography</Navbar.Brand>
+          <Navbar.Brand href="#home" style={{ color: "white" }}>
+            Old Yellar's Pet Photography
+          </Navbar.Brand>
           {/* <Navbar.Brand href="#home">Hello {user.username}</Navbar.Brand> */}
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -66,7 +73,11 @@ export default function RootLayout() {
                 {navLinkText}
               </NavLink> */}
               {user?.id ? (
-                <NavLink to="home" className="nav-link">
+                <NavLink
+                  to="home"
+                  className="nav-link"
+                  style={{ color: "white" }}
+                >
                   Home
                 </NavLink>
               ) : (
@@ -92,11 +103,47 @@ export default function RootLayout() {
                   ) : (
                     ""
                   )}
+                  {user?.user_role === "pet_owner" ? (
+                    <>
+                      {" "}
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">
+                        Contact Us!
+                      </NavDropdown.Item>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user_role === "photographer" ? (
+                    <Link to="" className="dropdown-item">
+                      Ask me about useLocation
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user_role === "photographer" ? (
+                    <Link to="home" className="dropdown-item">
+                      Photographer Stuff
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user_role === "photographer" ? (
+                    <>
+                      {" "}
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">
+                        Check Messages
+                      </NavDropdown.Item>
+                    </>
+                  ) : (
+                    ""
+                  )}
 
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">
                     Contact Us!
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> */}
                 </NavDropdown>
               ) : (
                 ""
@@ -109,9 +156,9 @@ export default function RootLayout() {
             title={user?.id ? user?.username : "Login/Signup"}
             id="basic-nav-dropdown"
           >
-            <NavLink to={navLinkTo} className="dropdown-item">
+            <Link to={navLinkTo} className="dropdown-item">
               {navLinkText}
-            </NavLink>
+            </Link>
             {user?.id ? (
               <NavLink to="edit_profile" className="dropdown-item">
                 Edit Profile
@@ -124,7 +171,11 @@ export default function RootLayout() {
             )}
             {user?.id ? (
               <>
-                <Button className="dropdown-item" onClick={handleShow}>
+                <Button
+                  style={{ color: "white" }}
+                  className="dropdown-item"
+                  onClick={handleShow}
+                >
                   Delete Profile
                 </Button>
 
@@ -155,7 +206,21 @@ export default function RootLayout() {
         </Container>
         {/* <h1>testin out container</h1> */}
       </Navbar>
-      {/* <BreadCrumbs /> */}
+      {location.pathname === "/" ? (
+        <div>
+          <Container>
+            <Row className="justify-content-center">
+              <Col className="text-center">
+                <img
+                  src="./Old_Yeller_Logo_Black-01.png"
+                  alt=""
+                  className="img-fluid"
+                />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      ) : null}
       <main>
         <Outlet />
       </main>

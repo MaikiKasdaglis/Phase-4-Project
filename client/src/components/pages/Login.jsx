@@ -1,15 +1,17 @@
 import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "../../hooks/userStore";
-
+import Carousel from "react-bootstrap/Carousel";
+import { useState } from "react";
 function Login() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [errorStatus, setErrrorStatus] = useState(false);
   const navigate = useNavigate();
   const { updateUser } = useUserStore();
-  const backgroundImageURL =
-    "https://i.pinimg.com/564x/30/ec/f3/30ecf302ac72d8bda2631fd4104aeaa9.jpg";
+  // const backgroundImageURL =
+  //   "https://i.pinimg.com/564x/30/ec/f3/30ecf302ac72d8bda2631fd4104aeaa9.jpg";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -38,35 +40,62 @@ function Login() {
       })
       .catch((error) => {
         console.log("error", error.message);
+        setErrrorStatus(!errorStatus);
+        console.log(errorStatus);
       });
   };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center", // This will center vertically
-      }}
-    >
-      {/* Background Image */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: `url(${backgroundImageURL})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: 1,
-        }}
-      ></div>
+    <div style={{ position: "relative", height: "100vh" }}>
+      {errorStatus ? (
+        <>
+          {["danger"].map((variant) => (
+            <Alert key={variant} variant={variant}>
+              Invalid Username or Password. Click the link to Signup
+              <Link style={{ color: "red" }} to="signup">
+                . JOIN NOW!
+              </Link>
+              .
+            </Alert>
+          ))}
+        </>
+      ) : (
+        ""
+      )}
+      <Carousel fade controls={false} indicators={false} interval={3000}>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://as2.ftcdn.net/v2/jpg/06/05/43/01/1000_F_605430104_9pZos4pteEyppZvPvjlZE2nzRtScU7A7.jpg"
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://i.pinimg.com/564x/e3/47/d1/e347d1ef3e366de8afc43e82c7a677b1.jpg"
+            alt="Second slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://i.pinimg.com/564x/3d/ab/ac/3dabac13fb458a831842d67c0864a1a6.jpg"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+        {/* ... add more items if you have more images */}
+      </Carousel>
 
-      <Container style={{ zIndex: 5, position: "relative" }}>
+      <Container
+        style={{
+          zIndex: 5,
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
         <Row className="justify-content-center">
           <Col xs={12} md={8} lg={6}>
             <div
@@ -98,7 +127,7 @@ function Login() {
                   onClick={handleLogin}
                   className="m-1 "
                 >
-                  Submit
+                  Login
                 </Button>
                 <Link
                   style={{ marginLeft: "5px" }}

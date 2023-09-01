@@ -59,7 +59,7 @@ export default function DogCard({ dog }) {
 
   return (
     <>
-      <Card style={{ width: "18rem", marginLeft: "20px", marginTop: "20px" }}>
+      <Card style={{ width: "100%", margin: "20px" }}>
         <Card.Body>
           <Card.Title>{dog_name}</Card.Title>
           <Card.Text>Age: {dog_age}</Card.Text>

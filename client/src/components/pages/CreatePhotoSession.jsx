@@ -55,7 +55,7 @@ export default function CreatePhotoSession() {
   };
 
   return (
-    <Container fluid>
+    <Container fluid >
       <Row className="justify-content-center mt-4">
         <Col xs={12} md={8} lg={6}>
           <div className="border p-4 rounded">

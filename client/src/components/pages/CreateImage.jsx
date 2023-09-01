@@ -19,15 +19,20 @@ export default function CreateImage({ setId }) {
       ...imageObj,
       image_url: image,
     };
+    // const finalObj = {
+    //   set_id: setId,
+    //   image_liked_by_users: "no",
+    //   image_url: image,
+    // };
 
-    console.log(finalObj);
+    // console.log(finalObj);
 
     fetch("/api/images", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(imageObj),
+      body: JSON.stringify(finalObj),
     })
       .then((response) => {
         if (!response.ok) {
@@ -36,7 +41,7 @@ export default function CreateImage({ setId }) {
         return response.json();
       })
       .then((data) => {
-        updateUser(data);
+        console.log(data);
       })
       .catch((error) => {
         console.log("error", error.message);
@@ -45,13 +50,17 @@ export default function CreateImage({ setId }) {
   return (
     <>
       <Form onSubmit={handleCreate}>
-        <Form.Group controlId="formBasicUserImage">
-          <Form.Label>Upload Image</Form.Label>
-          <UploadWidgets setImage={setImage} />
-        </Form.Group>{" "}
-        <Button variant="primary" type="submit" className="m-1 ">
-          Submit Image
-        </Button>
+        <div
+          className="mt-2 "
+          style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}
+        >
+          <Form.Group controlId="formBasicUserImage">
+            <UploadWidgets setImage={setImage} />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit Image
+          </Button>
+        </div>
       </Form>
     </>
   );

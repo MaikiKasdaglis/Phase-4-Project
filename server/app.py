@@ -164,6 +164,7 @@ class Images(Resource):
         return make_response(images, 200)
     def post(self):
         request_obj = request.get_json()
+        print(request_obj)
         try:
             new_image = Image(
                  image_url =request_obj["image_url"],

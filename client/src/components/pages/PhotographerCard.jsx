@@ -14,6 +14,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import useUserStore from "../../hooks/userStore";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 //============TOP OF THE FUNCTION===============================
 export default function PhotographerCard({ photographer }) {
@@ -75,14 +76,22 @@ export default function PhotographerCard({ photographer }) {
   };
 
   return (
-    <Col g-2 style={{ margin: "10px 0" }}>
-      <Card style={{ width: "18rem" }}>
+    <Col g-2 style={{ margin: "20px 0" }}>
+      {" "}
+      {/* Adjusted margin */}
+      <Card
+        style={{
+          width: "18rem",
+          backgroundImage: "linear-gradient(gray, lightgray)",
+        }}
+      >
         {user_image.includes(".") ? (
           <Card.Img variant="top" src={user_image} />
         ) : (
           <AdvancedImage
             cldImg={cld.image(user_image)}
             height="285"
+            // className="img-fluid"
             key={user.user_image}
           />
         )}
@@ -99,7 +108,7 @@ export default function PhotographerCard({ photographer }) {
 
           <Modal show={show} onHide={handleClose} animation={false}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Book Session</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form onSubmit={handleSubmit}>
@@ -123,17 +132,24 @@ export default function PhotographerCard({ photographer }) {
 
                   <Form.Control
                     as="select"
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      if (e.target.value === "register_new_dog") {
+                        navigate("/create_dog");
+                        return;
+                      }
                       setPhotoSession({
                         ...photoSession,
                         dog_id: e.target.value,
-                      })
-                    }
+                      });
+                    }}
                   >
                     <option value="">Select Dog</option>
                     {dogList.map((dog) => (
-                      <option value={dog.id}>{dog.dog_name}</option>
+                      <option key={dog.id} value={dog.id}>
+                        {dog.dog_name}
+                      </option>
                     ))}
+                    <option value="register_new_dog">Register Dog</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="session_date">
