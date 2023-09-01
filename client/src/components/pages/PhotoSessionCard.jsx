@@ -28,7 +28,7 @@ export default function PhotoSessionCard({ obj, deleteSession }) {
   const firsImage = obj.set_field.image_field[0]?.image_url;
   return (
     <Col g-2 style={{ margin: "10px 0" }}>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem" }} className="border rounded">
         {/* <Card.Img variant="top" src={firsImage} /> */}
 
         {firsImage && firsImage.includes(".") ? (
